@@ -26,10 +26,9 @@ describe('Pact Verification', () => {
     // the consumer's mainBranch property and all the currently deployed and currently released and supported versions of each consumer.
     // https://docs.pact.io/pact_broker/advanced_topics/consumer_version_selectors
     const fetchPactsDynamicallyOpts = {
-      provider: 'pactflow-example-provider',
+      provider: 'sarah-provider',
       consumerVersionSelectors: [
         { mainBranch: true },
-        { deployed: true },
         { matchingBranch: true }
       ],
       pactBrokerUrl: process.env.PACT_BROKER_BASE_URL,
