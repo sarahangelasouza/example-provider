@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase xmlns:con="http://eviware.com/soapui/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="e25d72e7-aa7d-4cb8-bbe5-c5ce7a626bcb" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="Test Case 1" searchProperties="true" timeout="0">
+  <con:settings id="aa95d9fe-754e-49d8-ae40-ef437891c978">
+    <con:setting id="IncludeOverview">true</con:setting>
+    <con:setting id="IncludeResults">true</con:setting>
+    <con:setting id="FlowLayout">false</con:setting>
+    <con:setting id="ErrorDetails">true</con:setting>
+    <con:setting id="IncludeCoverage">true</con:setting>
+    <con:setting id="e25d72e7-aa7d-4cb8-bbe5-c5ce7a626bcbfileName">Test-Case-1</con:setting>
+  </con:settings>
+  <con:savedRecentRuns>5</con:savedRecentRuns>
+  <con:testStep type="datasource" name="Data Source" id="d4b63548-42b0-4ee3-95e4-dc043ef081da">
+    <con:settings>
+      <con:setting id="com.eviware.soapui.impl.wsdl.teststeps.datasource.DataSourceContainer@prepared-properties">&lt;xml-fragment/></con:setting>
+    </con:settings>
+    <con:config xsi:type="con:DataSourceStep">
+      <con:dataSource type="JDBC">
+        <con:configuration>
+          <driver/>
+          <connstr/>
+          <pass/>
+          <Connection/>
+          <query/>
+          <fetchSize/>
+          <stored-procedure>false</stored-procedure>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>City</con:property>
+      <con:property>Country</con:property>
+      <con:startRow>1</con:startRow>
+      <con:endRow/>
+      <con:recordsPerIteration>1</con:recordsPerIteration>
+      <con:completeLastOperation>true</con:completeLastOperation>
+      <con:trimValues>false</con:trimValues>
+      <con:entitizeValues>false</con:entitizeValues>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:expandProperties>false</con:expandProperties>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="GET Weather City" id="de550f49-c098-46b5-9bac-9ee66050fa36">
+    <con:settings/>
+    <con:config service="http://api.openweathermap.org" resourcePath="/data/{version}/weather" methodName="Weather" xsi:type="con:RestRequestStep">
+      <con:restRequest name="GET Weather City" id="437e00c4-012a-42fe-aadf-ec469ac30945" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>http://api.openweathermap.org</con:endpoint>
+        <con:request/>
+        <con:originalUri>http://api.openweathermap.org/data/2.5/weather</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="1a03c0c3-21e7-464a-93a8-b09e505727b6" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200, 202</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" id="afa4415b-5d0a-4668-a535-94c4bbf602c2" name="Match content of [country]">
+          <con:configuration>
+            <path>$['sys']['country']</path>
+            <content>${Data Source#Country}</content>
+            <allowWildcards>false</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="9f1800b9-3552-4e52-82a4-5d45190255cf" name="Response SLA">
+          <con:configuration>
+            <SLA>150</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="q" value="${Data Source#City}"/>
+          <con:entry key="appid" value="85c705dd76051cb3d8e5540b300279d4"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>q</con:entry>
+          <con:entry>appid</con:entry>
+          <con:entry>version</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="transfer" name="Property Transfer" id="45a85660-91c5-48db-9764-4c2c147420e1">
+    <con:settings/>
+    <con:config xsi:type="con:PropertyTransfersStep">
+      <con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false">
+        <con:name>lat</con:name>
+        <con:sourceType>Response</con:sourceType>
+        <con:sourceStep>GET Weather City</con:sourceStep>
+        <con:sourcePath>$['coord']['lat']</con:sourcePath>
+        <con:targetType>TC_lat</con:targetType>
+        <con:targetStep>#TestCase#</con:targetStep>
+        <con:targetPath/>
+        <con:type>JSONPATH</con:type>
+        <con:upgraded>true</con:upgraded>
+      </con:transfers>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="GET Weather Coord" id="b0fc6bdf-149e-4960-9ff3-dbb5291d39b1">
+    <con:settings/>
+    <con:config service="http://api.openweathermap.org" resourcePath="/data/{version}/weather" methodName="Weather 2" xsi:type="con:RestRequestStep">
+      <con:restRequest name="GET Weather Coord" id="1f466674-9b98-4ad3-aa16-c5c3c80371df" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>http://api.openweathermap.org</con:endpoint>
+        <con:request/>
+        <con:originalUri>http://api.openweathermap.org/data/2.5/weather</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="d8ac77b4-ac42-4d88-92c5-d9b295b21a0d" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="03a69e95-c378-4764-9ddc-313678f1b424" name="Response SLA">
+          <con:configuration>
+            <SLA>200</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" id="2a8400a4-581f-4879-a9cc-4f9073898917" name="Match content of [name]">
+          <con:configuration>
+            <path>$['name']</path>
+            <content>${GET Weather City#Response#$['name']}</content>
+            <allowWildcards>false</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>Inherit From Parent</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="lon" value="${GET Weather City#Response#$['coord']['lon']}"/>
+          <con:entry key="lat" value="${#TestCase#TC_lat}"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>lat</con:entry>
+          <con:entry>lon</con:entry>
+          <con:entry>appid</con:entry>
+          <con:entry>version</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasourceloop" name="Data Source Loop" id="6d1607ac-d25b-4705-8bf5-0c915c88eae8">
+    <con:settings/>
+    <con:config>
+      <dataSourceStep>Data Source</dataSourceStep>
+      <targetStep>GET Weather City</targetStep>
+      <discardResults>false</discardResults>
+    </con:config>
+  </con:testStep>
+  <con:properties>
+    <con:property>
+      <con:name>TC_lat</con:name>
+      <con:value>-23.5475</con:value>
+    </con:property>
+  </con:properties>
+  <con:reportParameters/>
+  <con:tagId>86698a23-b1ce-493c-a75a-b769df5a5c5b</con:tagId>
+</con:testCase>

